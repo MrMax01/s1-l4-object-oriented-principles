@@ -65,7 +65,7 @@ public Dipendente(long idMatricola, long stipendio, int ore, Livelli livello, Di
         if(ore>0){
             this.importoOrarioDecimale = ore*12;
         }else{
-           this.importoOrarioDecimale= -(ore*12);
+            System.out.println("non puoi aver fatto orari straordinari in negativo!");
         }
     }
 public void setDipartimento(Dipartimenti dipartimento){
@@ -126,6 +126,12 @@ this.dipartimento = dipartimento;
                         ", dipartimento=" + dipartimento +
                         '}');
     }
+    public static double calcolaPaga(Dipendente dip){
+        return dip.importoOrarioDecimale + dip.stipendio;
+    }
 
-
+    public static  double calcolaPaga(Dipendente dip, int ore){
+        dip.setImportoOrarioDecimale(ore);
+        return dip.importoOrarioDecimale+dip.stipendio;
+    }
 }
