@@ -33,11 +33,11 @@ public class Dipendente {
         this.livello= Livelli.OPERAIO;
         this.dipartimento = dipartimento;
     }
-public Dipendente(long idMatricola, long stipendio, int ore, Livelli livello, Dipartimenti dipartimento){
+public Dipendente(long idMatricola, long stipendio, long importoOrarioDecimale, Livelli livello, Dipartimenti dipartimento){
         this.stipendioBase = 1000;
         this.matricola= idMatricola;
         this.stipendio = stipendio;
-        setImportoOrarioDecimale(ore);
+        setImportoOrarioDecimale(importoOrarioDecimale);
         this.livello = livello;
         setDipartimento(dipartimento);
 
@@ -61,12 +61,14 @@ public Dipendente(long idMatricola, long stipendio, int ore, Livelli livello, Di
         return importoOrarioDecimale;
     }
 
-    public void setImportoOrarioDecimale(int ore) {
-        if(ore>0){
-            this.importoOrarioDecimale = ore*12;
+    public void setImportoOrarioDecimale(long importoOrarioDecimale) {
+        if(importoOrarioDecimale>=0){
+
+            this.importoOrarioDecimale = importoOrarioDecimale;
         }else{
-            System.out.println("non puoi aver fatto orari straordinari in negativo!");
+            System.out.println("error");
         }
+
     }
 public void setDipartimento(Dipartimenti dipartimento){
 this.dipartimento = dipartimento;
@@ -131,7 +133,6 @@ this.dipartimento = dipartimento;
     }
 
     public static  double calcolaPaga(Dipendente dip, int ore){
-        dip.setImportoOrarioDecimale(ore);
-        return dip.importoOrarioDecimale+dip.stipendio;
+        return (dip.importoOrarioDecimale*ore)+dip.stipendio;
     }
 }
